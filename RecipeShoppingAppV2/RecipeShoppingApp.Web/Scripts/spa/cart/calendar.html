@@ -1,0 +1,114 @@
+﻿<div>
+    <form class="form-horizontal" role="form" novalidate angular-validator name="addShoppingForm" angular-validator-submit="AddShoppingHeader()">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-6">
+                    <p class="input-group">
+                        <input type="text"
+                               ng-change="changeDateEvent()"
+                               class="form-control"
+                               name="dateReleased"
+                               datepicker-popup="{{format}}"
+                               ng-model="Date"
+                               is-open="datepicker.opened"
+                               date-disabled="disabled(date, mode)"
+                               datepicker-options="dateOptions" +
+                               ng-required="true"
+                               datepicker-append-to-body="true"
+                               close-text="Close"
+                               validate-on="blur"
+                               required required-message="'Date Released is required'" 
+                               style="margin-left:15px;"
+                               />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                    <ng-form ng-class="weekform">
+                        <div class="container">
+                            <div class="col-xs-1">
+                                <div class="panel panel-primary" style="height: 200px; width:100px">
+                                    <div class="panel-heading">Sunday</div>
+                                    <button type="button" ng-click="clearElements('sunday')" class="btn btn-danger btn-xs pull-left">X</button>
+                                    <div class="clearfix"></div>
+                                    <div id="sundayPanel" class="panel-body" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                        <h4 ng-repeat="xsun in Sun " id={{xsun.id}} data-value="{{xsun.id}}" class="media-heading ng-binding" draggable="true" ondragstart="drag(event)">{{xsun.recipename |limitTo : 18}}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-1">
+                                <div class="panel panel-primary" style="height: 200px; width:100px">
+                                    <div class="panel-heading">Monday</div>
+                                    <button type="button" ng-click="clearElements('monday')" class="btn btn-danger btn-xs pull-left">X</button>
+                                    <div class="clearfix"></div>
+                                    <div id="mondayPanel" class="panel-body" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                        <h4 ng-repeat="mon in Mon" id={{mon.id}} data-value="{{mon.id}}" class="media-heading ng-binding" draggable="true" ondragstart="drag(event)">{{mon.recipename |limitTo : 18}}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-1">
+                                <div class="panel panel-primary" style="height: 200px; width:100px">
+                                    <div class="panel-heading">Tuesday</div>
+                                    <button type="button" ng-click="clearElements('tuesday')" class="btn btn-danger btn-xs pull-left">X</button>
+                                    <div class="clearfix"></div>
+                                    <div id="tuesdayPanel" class="panel-body" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                        <h4 ng-repeat="tue in Tue" id={{tue.id}} data-value="{{tue.id}}" class="media-heading ng-binding" draggable="true" ondragstart="drag(event)">{{tue.recipename |limitTo : 18}}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-1">
+                                <div class="panel panel-primary" style="height: 200px; width:100px">
+                                    <div class="panel-heading">Wednesday</div>
+                                    <button type="button" ng-click="clearElements('wednesday')" class="btn btn-danger btn-xs pull-left">X</button>
+                                    <div class="clearfix"></div>
+                                    <div id="wednesdayPanel" class="panel-body" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                        <h4 ng-repeat="wed in Wed" id={{wed.id}} data-value="{{wed.id}}" class="media-heading ng-binding" draggable="true" ondragstart="drag(event)">{{wed.recipename |limitTo : 18}}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-1">
+                                <div class="panel panel-primary" style="height: 200px; width:100px">
+                                    <div class="panel-heading">Thursday</div>
+                                    <button type="button" ng-click="clearElements('thursday')" class="btn btn-danger btn-xs pull-left">X</button>
+                                    <div class="clearfix"></div>
+                                    <div id="thursdayPanel" class="panel-body" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                        <h4 ng-repeat="thu in Thu" id={{thu.id}} data-value="{{thu.id}}" class="media-heading ng-binding" draggable="true" ondragstart="drag(event)">{{thu.recipename |limitTo : 18}}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-1">
+                                <div class="panel panel-primary" style="height: 200px; width:100px">
+                                    <div class="panel-heading">Friday</div>
+                                    <button type="button" ng-click="clearElements('friday')" class="btn btn-danger btn-xs pull-left">X</button>
+                                    <div class="clearfix"></div>
+                                    <div id="fridayPanel" class="panel-body" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                        <h4 ng-repeat="fri in Fri" id={{fri.id}} data-value="{{fri.id}}" class="media-heading ng-binding" draggable="true" ondragstart="drag(event)">{{fri.recipename |limitTo : 18}}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-1">
+                                <div class="panel panel-primary" style="height: 200px; width:100px">
+                                    <div class="panel-heading">Saturday</div>
+                                    <button type="button" ng-click="clearElements('saturday')" class="btn btn-danger btn-xs pull-left">X</button>
+                                    <div class="clearfix"></div>
+                                    <div id="saturdayPanel" class="panel-body" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                        <h4 ng-repeat="sat in Sat" id={{sat.id}} data-value="{{sat.id}}" class="media-heading ng-binding" draggable="true" ondragstart="drag(event)">{{sat.recipename |limitTo : 18}}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-form>
+
+                </div>
+            </div>
+        </div>
+ 
+      
+        <div class="form-group col-xs-2">
+            <label class="control-label"></label>
+            <div class="x">
+                <input type="submit" class="btn btn-primary" value="Generate Shopping List" />
+            </div>
+        </div>
+    </form>
+</div>

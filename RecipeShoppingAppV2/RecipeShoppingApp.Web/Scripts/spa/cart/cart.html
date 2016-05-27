@@ -1,0 +1,89 @@
+﻿<script>
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data).cloneNode(true));
+    }
+
+
+
+</script>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-7">
+            <button title="Add New Recipe"
+                    data-toggle="popover"
+                    data-placement="bottom"
+                    data-container="body"
+                    data-html="true"
+                    class="btn btn-primary pull-left"
+                    ng-controller="recipeAddCtrl"
+                    popover-template="myPopover.templateUrl"
+                    popover-title="Add Recipe"
+                    popover-placement="bottom"
+                    popover-is-open="myPopover.isOpen"
+                    ng-click="myPopover.open()"
+                    style="margin-top:10px;margin-bottom:10px;">
+                    Add New <i class="glyphicon glyphicon-plus"></i>
+            </button>
+            <div class="panel panel-primary" style="max-width:693px;margin-top:50px">
+                <div class="panel-heading clearfix">
+                    <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Recipes</h4>
+                    <div class="input-group">
+                        <input id="inputSearchRecipes" type="search" ng-model="filterRecipes" class="form-control shortInputSearch" placeholder="Filter, search recipies..">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary" ng-click="search();"><i class="glyphicon glyphicon-search"></i></button>
+                            <button class="btn btn-primary" ng-click="clearSearch();"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="recipe in recipes | filter:filterRecipes">
+                            <div class="media">
+                                <a class="fancybox pull-left" rel="gallery1" ng-href="../../Content/images/recipe/{{recipe.Image}}" title="{{recipe.Description | limitTo:200}}">
+                                    <img class="img-circle media-object" ng height="120" width="150" ng-src="../../Content/images/recipe/{{recipe.Image}}" alt="" />
+                                </a>
+                                <div class="media-body">
+                                    <h4 name="{{recipe.ID}}" class="recipe" data-value="{{recipe.ID}}" draggable="true" ondragstart="drag(event)" id="{{recipe.ID}}">{{recipe.RecipeName |limitTo : 18}}</h4>
+                                    Description: <strong>{{recipe.Description|limitTo : 10}}</strong>
+                                    <br />
+                                    Servings: <strong>{{recipe.Serving}}</strong>
+                                </div>
+                                <div class="media-bottom">
+                                    <span component-rating="{{recipe.Rating}}"></span>
+                                </div>
+                                <div class="pull-right">
+
+                                    <button class="btn btn-success btn-xs" ng-click="LoadIngredientDetails(recipe.RecipeName,recipe.ID);">Ingredients<i class=" fa fa-street-view pull-right"></i></button>
+
+                                    <a ng-href="#/recipe/edit/{{recipe.ID}}"><button class="btn btn-primary btn-xs">Manage <i class=" fa fa-pencil pull-right"></i></button></a>
+                                </div>
+                                <br /><br />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="text-center">
+                            <custom-pager page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="search(page)"></custom-pager>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <calendar></calendar>
+        </div>
+        <div class="col-sm-5">
+            <ingredients></ingredients>
+        </div>
+    </div>
+</div>    
+

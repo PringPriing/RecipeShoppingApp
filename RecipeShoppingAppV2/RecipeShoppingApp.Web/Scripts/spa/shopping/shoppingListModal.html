@@ -1,0 +1,33 @@
+﻿<div class="panel panel-primary">
+    <div class="panel-heading">
+      <h1>Shopping List</h1>
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Ingredients</th>
+                        <th>Serving</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="ingredient in ShoppingList">
+                        <td>{{ingredient.Name}}</td>
+                        <td>{{(ingredient.Serving * 1) * (ingredient.RecipeServing * 1 )}} {{ingredient.MeasurementName}}</td>
+                    </tr>
+                </tbody>
+                 <tfoot>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="panel-footer clearfix">
+        <div class="pull-left">
+            <button ng-click="Export();" type="button" class="btn btn-primary">Export to PDF</button>
+        </div>
+        <div class="pull-right">
+            <button type="button" class="btn btn-danger" ng-click="close();">Close</button>
+        </div>
+    </div>
+</div>

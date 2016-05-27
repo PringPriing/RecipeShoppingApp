@@ -1,0 +1,47 @@
+﻿<form class="form-horizontal" role="form" novalidate angular-validator name="addMeasurementForm" angular-validator-submit="AddMeasurement()">
+    <div class="form-group col-md-6">
+        <div class="panel panel-primary ">
+            <div class="panel-heading clearfix">
+                <h5 class="pull-left">Measurements</h5>
+                <div class="input-group">
+                    <input id="inputSearchMovies" type="search" ng-model="filterMeasurement" class="form-control" placeholder="Filter..">
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary" ng-click="clearSearch();"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>
+                                <input class="form-control" name="title" type="text" ng-model="measurement.Name"
+                                       validate-on="blur" required required-message="'Name is required'">
+                            </td>
+                            <td><input type="submit" class="btn btn-primary" value="Add Measurement" /></td>
+                        </tr>
+                        <tr>
+                            <th style="width:5%">Name</th>
+                            <th style="width:3%">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="measurement in measurements | filter:filterMeasurement">
+                            <td>
+                                <span ng-show="mode != 'edit'">{{measurement.Name}}</span>
+                                <input ng-show="mode == 'edit'" ng-model="measurement.Name" />
+                            </td>
+                            <td>
+                                <button ng-click="DeleteMeasurement(measurement.ID)" class="btn btn-danger">Delete</button>
+                                <button class="btn btn-primary" ng-show="mode != 'edit'" ng-click="mode = 'edit'">Update</button>
+                                <button class="btn btn-success" ng-show="mode == 'edit'" ng-click="UpdateMeasurement(measurement.ID,measurement.Name); mode = null">Save</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>

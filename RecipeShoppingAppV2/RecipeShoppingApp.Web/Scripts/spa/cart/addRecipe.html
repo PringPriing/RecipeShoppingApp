@@ -1,0 +1,28 @@
+﻿<div id="popover-content">
+    <form>
+        <label class="control-label">Recipe</label>
+        <input class="form-control" name="title" type="text" ng-model="recipe.RecipeName"
+               validate-on="blur" required required-message="'Recipe is required'">
+        <label class="control-label">Servings</label>
+        <div class="input-group number-spinner">
+            <span class="input-group-btn">
+                <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+            </span>
+            <input type="text" class="form-control text-center" id="inputServing" ng-model="recipe.Serving">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="changeNumberOfStocks($event)" id="btnSetServing" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+            </span>
+        </div>
+        <label class="control-label">Description</label>
+        <textarea class="form-control" ng-model="recipe.Description" name="description" rows="3"
+                  validate-on="blur" required required-message="'Recipe description is required'" />
+        <label class="control-label">Rating</label>
+        <span component-rating="{{recipe.Rating}}" ng-model="recipe.Rating" class="form-control"></span>
+        <label class="control-label">Photo</label>
+        <input type="file" ng-file-select="prepareFiles($files)">
+        <div style="margin-top:10px;">
+            <input ng-click="AddRecipe();" class="btn btn-primary" value="Submit recipe" />
+            <span></span>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,72 @@
+﻿<div id="">
+    <hr>
+    <div class="row">
+        <!-- left column -->
+        <div class="col-xs-3">
+            <div class="text-center">
+                <img class="avatar media-object"  ng-src="../../Content/images/avatar.jpg" alt="" align="middle" />
+                <h6>Add photo...</h6>
+
+                <input type="file" ng-file-select="prepareFiles($files)">
+            </div>
+        </div>
+
+        <!-- edit form column -->
+        <div class="col-xs-9 personal-info">
+            <div class="alert alert-info alert-dismissable">
+                <a class="panel-close close" data-dismiss="alert">×</a>
+                <i class="fa fa-plus"></i>
+                Add <strong>{{recipe.RecipeName}}</strong> recipe. Make sure you fill all required fields.
+            </div>
+            
+            <form class="form-horizontal" role="form" novalidate angular-validator name="addRecipeForm" angular-validator-submit="AddRecipe()">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-4">
+                            <label class="control-label">Recipe</label>
+                            <input class="form-control" name="title" type="text" ng-model="recipe.RecipeName"
+                                   validate-on="blur" required required-message="'Recipe is required'">
+                        </div>
+
+                        <div class="col-xs-6 col-sm-4">
+                            <label class="control-label">Servings</label>
+                            <div class="input-group number-spinner">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                </span>
+                                <input type="text" class="form-control text-center" id="inputStocks" ng-model="recipe.Serving">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="changeNumberOfStocks($event)" id="btnSetStocks" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Description</label>
+                    <textarea class="form-control" ng-model="recipe.Description" name="description" rows="3"
+                              validate-on="blur" required required-message="'Recipe description is required'" />
+                    <div class="form-group col-xs-12">
+                        <label class="control-label">Rating</label>
+                        <span component-="{{recipe.Rating}}" ng-model="recipe.Rating" class="form-control"></span>
+                    </div>
+                </div>
+
+                
+
+
+                <br />
+                <div class="form-group col-xs-4">
+                    <label class="control-label"></label>
+                    <div class="">
+                        <input type="submit" class="btn btn-primary" value="Submit recipe" />
+                        <span></span>
+                        <a class="btn btn-default" ng-href="#/">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr>
+</div>

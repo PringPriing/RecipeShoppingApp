@@ -1,0 +1,70 @@
+﻿<form class="form-horizontal" role="form" novalidate angular-validator name="AddIngredientForm" angular-validator-submit="AddIngredient();">
+    <div class="span6">
+        <!-- Need to place this div at the top right of the page-->
+                <h4>Recipe Name : {{Name}}</h4>
+                    <div class="panel panel-primary shortPanel">
+                        <div class="panel-heading clearfix">
+                            <h5 class="pull-left">Ingredients</h5>
+                            <div class="input-group">
+                                <input id="inputSearchIngredient" type="search" ng-model="filterIngredients" class="form-control" placeholder="Filter..Ingredient">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary" ng-click="clearSearchIngredient();"><i class="glyphicon glyphicon-remove-sign"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Ingredients</th>
+                                        <th>Serving</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="ingredient in ingredients | filter:filterIngredients">
+                                        <td>{{ingredient.Name}}</td>
+                                        <td>{{ingredient.Serving}}  {{ingredient.MeasurementName}}</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                <div>
+                    <div class="form-group">
+                        <div class="form-group col-xs-12">
+                            <div class="col-xs-6 col-sm-4 selectContainer">
+                                <label class="control-label">Ingredient</label>
+                                <input width="50" type="text" class="form-control" ng-model="Ingredient.Name" name="Name" id="Name" placeholder="Ingredient"
+                                       validate-on="blur" required required-message="'Ingredient is required'">
+                            </div>
+                            <div class="col-xs-6 col-sm-4">
+                                <label class="control-label">Servings</label>
+                                <div class="input-group number-spinner">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                                    </span>
+                                    <input type="text" class="form-control text-center" id="inputStocks" ng-model="Ingredient.Serving">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="changeNumberOfStocks($event)" id="btnSetStocks" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-4 selectContainer">
+                                <label class="control-label">Measurement</label>
+                                <select ng-model="Ingredient.MeasurementId" class="form-control black" ng-options="option.ID as option.Name for option in measurements" required></select>
+                                <input type="hidden" name="MeasurementID" ng-value="measurement.ID" />
+                            </div>
+                        </div>
+                        <div class="btn-group col-xs-6 col-sm-4">
+                            <button type="submit" ng-disabled="canSave" class="btn btn-primary">Save</button>
+                            <button type="button" class="btn btn-default" ng-click="clearSearch();">Clear</button>
+                        </div>
+                    </div>
+                </div>
+    </div>
+</form>
+
+
+
